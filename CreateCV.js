@@ -7,9 +7,9 @@ const phoneNumberElement = document.createElement('p');
 phoneNumberElement.textContent = 'Existed phone numbers: ';
 phoneNumberList.appendChild(phoneNumberElement);
 function generatePhoneNumberList(){
-    for(const key in localStorage){
+    for(const key in sessionStorage){
         if(key.startsWith('phoneNumber-')){
-            const phoneNumber = localStorage.getItem(key);
+            const phoneNumber = sessionStorage.getItem(key);
 
             const phoneNumberElement = document.createElement('p');
             phoneNumberElement.textContent = phoneNumber;
@@ -25,9 +25,9 @@ const CerDegElement = document.createElement('p');
 CerDegElement.textContent = 'Existed Certificate/Degree: ';
 CerDegList.appendChild(CerDegElement);
 function generateCerDegList(){
-    for(const key in localStorage){
+    for(const key in sessionStorage){
         if(key.startsWith('CerDeg-')){
-            const CerDeg = localStorage.getItem(key);
+            const CerDeg = sessionStorage.getItem(key);
 
             const CerDegElement = document.createElement('p');
             CerDegElement.textContent = CerDeg;
@@ -82,9 +82,9 @@ $(document).ready(function(){
         console.log('alert');
         if(checkphone()==1){
             let duplicate=false;
-            for(const key in localStorage){
+            for(const key in sessionStorage){
                 if(key.startsWith('phoneNumber-')){
-                    const existedNumber = localStorage.getItem(key);
+                    const existedNumber = sessionStorage.getItem(key);
                     if(existedNumber===document.getElementById('phone').value){
                         duplicate=true;
                         break;
@@ -94,7 +94,7 @@ $(document).ready(function(){
             if(!duplicate){
                 console.log('inside');
                 var phone=document.getElementById('phone').value;
-                localStorage.setItem('phoneNumber-'+phone, phone);
+                sessionStorage.setItem('phoneNumber-'+phone, phone);
                 $('#ModalPhone').modal('hide');
                 document.getElementById('phone').value='';
                 const phoneNumberElement = document.createElement('p');
@@ -128,9 +128,9 @@ $(document).ready(function(){
         console.log('alert');
         if(checkCerDeg()==1){
             let duplicate=false;
-            for(const key in localStorage){
+            for(const key in sessionStorage){
                 if(key.startsWith('CerDeg-')){
-                    const existedCerDeg = localStorage.getItem(key);
+                    const existedCerDeg = sessionStorage.getItem(key);
                     if(existedCerDeg===document.getElementById('CerDeg').value){
                         duplicate=true;
                         break;
@@ -140,7 +140,7 @@ $(document).ready(function(){
             if(!duplicate){
                 console.log('inside');
                 var CerDeg=document.getElementById('CerDeg').value;
-                localStorage.setItem('CerDeg-'+CerDeg, CerDeg);
+                sessionStorage.setItem('CerDeg-'+CerDeg, CerDeg);
                 $('#ModalCerDeg').modal('hide');
                 document.getElementById('CerDeg').value='';
                 const CerDegElement = document.createElement('p');
@@ -159,11 +159,11 @@ $(document).ready(function(){
             $('#submit_form_err').html('Please fill/correct all required input!');
             return false;
         }
-        localStorage.clear();
+        sessionStorage.clear();
         // var phoneNumbers=[];
-        // for(const key in localStorage){
+        // for(const key in sessionStorage){
         //     if(key.startsWith('phoneNumber-')){
-        //         phoneNumbers.push(localStorage.getItem(key));
+        //         phoneNumbers.push(sessionStorage.getItem(key));
         //     }
         // }
 
@@ -220,7 +220,8 @@ $(document).ready(function(){
     });
 
     $('#reset').on('click', function(){
-        localStorage.clear();
+        sessionStorage.clear();
+        window.location.href('CreateCV.php');
     });
 });
 
@@ -243,14 +244,14 @@ function addCerDeginput(CerDeg){
 }
 
 function existedphone(){
-    for(const key in localStorage){
+    for(const key in sessionStorage){
         if(key.startsWith('phoneNumber-')) return true;
     }
     return false;
 }
 
 function existedCerDeg(){
-    for(const key in localStorage){
+    for(const key in sessionStorage){
         if(key.startsWith('CerDeg-')) return true;
     }
     return false;
@@ -270,6 +271,7 @@ function checkcvname(){
             $.ajax({
                 url:"validationCVname.php",
                 type:"POST",
+                async:false,
                 data: {datane:input},
                 success: function(response){
                     const parsedResponse = JSON.parse(response);

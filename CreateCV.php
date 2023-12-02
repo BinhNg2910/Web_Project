@@ -201,7 +201,7 @@ $conn->close();
                     </div>
                     <div class="row justify-content-end text-center">
                         <div class="form-group col-sm-6"> <button type="submit" class="btn-block btn-primary" name="submit" style="background-color: #00BCD4" id="submit_form">Submit</button> </div>
-                        <div class="form-group col-sm-6"> <button type="reset" class="btn-block btn-primary" style="background-color: #ed5757" id="reset">Reset</button> </div>
+                        <div class="form-group col-sm-6"> <button type="button" class="btn-block btn-primary" style="background-color: #ed5757" id="reset">Reset</button> </div>
                     </div>
                     <span class="text-danger" style="text-align:center;" id="submit_form_err"></span>
                 </form>
