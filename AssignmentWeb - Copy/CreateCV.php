@@ -28,10 +28,12 @@ $sql = "CREATE TABLE IF NOT EXISTS General(
     Birthday DATETIME,
     Addr VARCHAR(500),
     Mail VARCHAR(255),
+    SessionMail VARCHAR(255),
     Website VARCHAR(255),
     Skills VARCHAR(500),
     PersonalSkills VARCHAR(500),
     Experience VARCHAR(500),
+    Photo VARCHAR(255),
     ResumeName VARCHAR(255)
 )";
 $conn->query($sql);
@@ -75,7 +77,7 @@ $conn->close();
             <p class="blue-text" style="font-weight: bold">Please type in your information</p>
             <div class="card">
                 <h5 class="text-center mb-4">Your Résumé</h5>
-                <form action="dbcreateCV.php" method="POST" class="form-card">
+                <form action="dbcreateCV.php" method="POST" class="form-card" enctype="multipart/form-data">
                     <div class="row justify-content-between text-left">
                         <div class="form-group col-sm-6 flex-column d-flex" style="margin:auto; text-align:center;"> 
                             <label class="form-control-label px-3">CV Name<span class="text-danger"> *</span></label> 
@@ -199,9 +201,15 @@ $conn->close();
                             <input type="text" id="experience" name="experience" placeholder="Type your job experience, e.g 2 years working at Renesas..."> 
                         </div>
                     </div>
+                    <div class="row justify-content-center text-center">
+                        <div class="form-group col-sm-6">
+                            <label class="form-control-label">Upload Photo</label>
+                            <input type="file" accept="image/jpeg,.jpeg,image/png,.png" placeholder="Upload Photo" name="file"/>
+                        </div>
+                    </div>
                     <div class="row justify-content-end text-center">
                         <div class="form-group col-sm-6"> <button type="submit" class="btn-block btn-primary" name="submit" style="background-color: #00BCD4" id="submit_form">Submit</button> </div>
-                        <div class="form-group col-sm-6"> <button type="button" class="btn-block btn-primary" style="background-color: #ed5757" id="reset">Reset</button> </div>
+                        <div class="form-group col-sm-6"> <button type="reset" class="btn-block btn-primary" style="background-color: #ed5757" id="reset">Reset</button> </div>
                     </div>
                     <span class="text-danger" style="text-align:center;" id="submit_form_err"></span>
                 </form>

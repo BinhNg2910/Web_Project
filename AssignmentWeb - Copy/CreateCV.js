@@ -37,27 +37,14 @@ function generateCerDegList(){
     }
 }
 
+window.addEventListener('beforeunload', function(){
+    this.sessionStorage.clear();
+});
+
 $(document).ready(function(){
     $('#cvname').blur(function(){
         $('#submit_form_err').html('');
         checkcvname();
-        // var input = $(this).val();
-        // if(input!=''){
-        //     console.log('in');
-        //     $.ajax({
-        //         url:"validationCVname.php",
-        //         type:"POST",
-        //         data: {datane:input},
-        //         success: function(response){
-        //             const parsedResponse = JSON.parse(response);
-        //             const message = parsedResponse.message;
-        //             if(message==false){
-        //                 console.log('hellohehe');
-        //                 $('#cvname_err').html("Existed CV's name!");
-        //             }
-        //         }
-        //     });
-        // }
     });
     $('#fname').on('input', function(){
         $('#submit_form_err').html('');
@@ -79,7 +66,6 @@ $(document).ready(function(){
     submitphone.addEventListener('click', function() {
         var x = document.getElementById('phone_submit');
         x.disabled=true;
-        console.log('alert');
         if(checkphone()==1){
             let duplicate=false;
             for(const key in sessionStorage){
@@ -92,7 +78,6 @@ $(document).ready(function(){
                 }
             }
             if(!duplicate){
-                console.log('inside');
                 var phone=document.getElementById('phone').value;
                 sessionStorage.setItem('phoneNumber-'+phone, phone);
                 $('#ModalPhone').modal('hide');
@@ -125,7 +110,6 @@ $(document).ready(function(){
     submitCerDeg.addEventListener('click', function(){
         var x = document.getElementById('CerDeg_submit');
         x.disabled=true;
-        console.log('alert');
         if(checkCerDeg()==1){
             let duplicate=false;
             for(const key in sessionStorage){
@@ -138,7 +122,6 @@ $(document).ready(function(){
                 }
             }
             if(!duplicate){
-                console.log('inside');
                 var CerDeg=document.getElementById('CerDeg').value;
                 sessionStorage.setItem('CerDeg-'+CerDeg, CerDeg);
                 $('#ModalCerDeg').modal('hide');
@@ -160,51 +143,6 @@ $(document).ready(function(){
             return false;
         }
         sessionStorage.clear();
-        // var phoneNumbers=[];
-        // for(const key in sessionStorage){
-        //     if(key.startsWith('phoneNumber-')){
-        //         phoneNumbers.push(sessionStorage.getItem(key));
-        //     }
-        // }
-
-        // const phoneNumberContainer = document.getElementById('phoneNumberContainer');
-        // for(const phoneNumber of phoneNumbers){
-        //     const newPhoneNumberInput = document.createElement('input');
-        //     newPhoneNumberInput.type = 'hidden';
-        //     newPhoneNumberInput.name = 'phoneNumber-'+phoneNumber;
-        //     newPhoneNumberInput.value = phoneNumber;
-        // }
-        // var cvname = $('#cvname').val();
-        // var mail = $('#mail').val();
-        // var fname = $('#fname').val();
-        // var birthday = $('#birthday').val();
-        // var address = $('#address').val();
-        // var website = $('#website').val();
-        // var skill = $('#skill').val();
-        // var personalskil = $('#personalskill').val();
-        // var experience = $('#experience').val();
-        // var dataForm={
-        //     cvname: cvname, mail: mail, fname: fname, birthday: birthday, address: address, website: website, skill: skill,
-        //     personalskill: personalskil, experience: experience, phone: phoneNumbers
-        // };
-        // var jsondataForm=JSON.stringify(dataForm);
-        // $.ajax({
-        //     url: 'dbcreateCV.php',
-        //     type: "POST",
-        //     data:{
-        //         cvname: cvname, mail: mail, fname: fname, birthday: birthday, address: address, website: website, skill: skill,
-        //         personalskill: personalskil, experience: experience, phone: phoneNumbers
-        //     },
-        //     success: (response) => {
-        //         alert('suc');
-        //         console.log('Phone numbers sent successfully');
-        //     },
-        //     error: (error) => {
-        //         alert('error');
-        //         console.log('failed');
-        //         console.error('Error sending phone numbers: ', error.message);
-        //     }
-        // });
         return true;
     });
 
@@ -221,7 +159,7 @@ $(document).ready(function(){
 
     $('#reset').on('click', function(){
         sessionStorage.clear();
-        window.location.href('CreateCV.php');
+        window.location.href='CreateCV.php';
     });
 });
 
@@ -259,25 +197,23 @@ function existedCerDeg(){
 
 function checkcvname(){
     var cvname = $('#cvname').val();
+    var check=false;
     if(cvname==""){
         $('#cvname_err').html('Required CV name!');
         return false;
     } else {
-        var check;
         $('#submit_form_err').html('');
         var input = cvname;
         if(input!=''){
-            console.log('in');
             $.ajax({
                 url:"validationCVname.php",
                 type:"POST",
-                async:false,
+                async: false,
                 data: {datane:input},
                 success: function(response){
                     const parsedResponse = JSON.parse(response);
                     const message = parsedResponse.message;
                     if(message==true){
-                        console.log('hellohehe');
                         check=true;
                         $('#cvname_err').html("Existed CV's name!");
                     }
@@ -342,9 +278,7 @@ function checkaddress(){
 function checkphone(){
     let input = $('#phone').val();
     const regex= /^[0-9]{8,11}$/g;
-    console.log(input.match(regex));
     if(!input.match(regex)){
-        console.log('phone error');
         $('#phone_err').html('Invalid phone number(s)');
         return false;
     }
@@ -357,7 +291,6 @@ function checkmail(){
     let input = $('#mail').val();
     const regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     if(!input.match(regex)){
-        console.log("mail error");
         $('#mail_err').html('Invalid mail address!');
         return false;
     }
@@ -385,7 +318,6 @@ function checkCerDeg(){
         $('#CerDeg_err').html('Empty space! You can not submit, please try again!');
         return false;
     }
-    // alert('Successful! Please click OK');
     document.getElementById('CerDeg_submit').disabled=false;
     $('#CerDeg_err').html('');
     return true;
