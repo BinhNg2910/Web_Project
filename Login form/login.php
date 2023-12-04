@@ -66,8 +66,9 @@
               </div>
 
               <!-- Submit button -->
-              <!-- <button type="button" class="btn btn-primary btn-block mb-4">Sign in</button> -->
-              <input type="submit" value="Log in">
+
+              <button type="submit" class="btn btn-primary btn-block mb-4">Sign in</button>
+              <!-- <input type="submit" value="Log in"> -->
             </form>
 
           </div>

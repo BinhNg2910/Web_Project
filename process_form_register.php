@@ -1,7 +1,7 @@
 <?php
 
-require_once('utility.php');
-require_once('dbhelper.php');
+require_once('C:/Users/vanbi/OneDrive - hcmut.edu.vn/Subjects/WebProgramming/Web_Project/utility.php');
+require_once('C:/Users/vanbi/OneDrive - hcmut.edu.vn/Subjects/WebProgramming/Web_Project/dbhelper.php');
 $fullname = $email = $msg = '';
 
 if(!empty($_POST)) {
