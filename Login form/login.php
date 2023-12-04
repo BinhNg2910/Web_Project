@@ -1,111 +1,3 @@
-<?php
-
-session_start();
-
-// Check if the form was submitted with POST method
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  // Check if both email and password are set
-  if (isset($_POST['email']) && isset($_POST['password'])) {
-    // Create a connection
-    $mysqli = new mysqli("localhost", "root", "", "UserAccount");
-
-    // Check connection
-    if ($mysqli->connect_error) {
-        die("Connection failed: " . $mysqli->connect_error);
-    }
-
-    // Get the email and password from the form
-    $email = $_POST['user_email'];
-    $password = $_POST['user_password'];
-
-    // Prepare a SQL query to find the user with the entered email
-    $sql = "SELECT * FROM users WHERE email = ?";
-    $stmt = $mysqli->prepare($sql);
-    $stmt->bind_param('s', $email);
-    $stmt->execute();
-    $result = $stmt->get_result();  
-
-    // Check if the user exists and if the password is correct
-    if ($row = $result->fetch_assoc()) {
-        if (password_verify($password, $row['password'])) {
-            // Assign values to session variables
-            // $_SESSION['userID'] = $row['userID'];
-            // $_SESSION['username'] = $row['username'];
-            $_SESSION['email'] = $row['email'];
-
-
-            // Set a cookie for auto-login
-            setcookie('auto_login', $row['email'], time() + 300);
-
-            // Redirect to the dashboard
-            header("Location: index.php");
-        } else {
-            echo '<script>window.alert("Incorrect username or password!");</script>';
-            // header("Location: index.php?page=login");
-        }
-    } else {
-        echo '<script>window.alert("Incorrect username or password!");</script>';
-        // header("Location: index.php?page=login");
-    }
-
-    // Close the connection
-    $mysqli->close();
-  } else {
-      // Redirect or display an error message if email or password is not set
-      echo '<script>window.alert("Email and password are required!");</script>';
-      // header("Location: index.php?page=login");
-  }
-} else {
-  // Redirect or display an error message if the form was not submitted with POST method
-  echo '<script>window.alert("Invalid form submission!");</script>';
-  // header("Location: index.php?page=login");
-}
-
-if(isset($_POST["login"])) {
-  $email = $_POST["$email"];
-  $password = $_POST["$password"];
-  require_once "database.php";
-  $sql = "SELECT * FROM users where email='$email'";
-  $result = mysqli_query($conn, $sql);
-  $user = mysqli_fetch_array($result, MYSQLI_ASSOC);
-  if($user) {
-    if(password_verify($password, $user["password"])) {
-      header("Location: index.php");
-      die();
-    }
-    else {
-      echo "<div class = 'alert alert-danger'>Password does not match</div>"; 
-    }
-  } else {
-    echo "<div class = 'alert alert-danger'>Email does not exist</div>"; 
-  }
-}
-
-// if ($_SERVER["REQUEST_METHOD"] == "POST") {
-//     $email = $_POST["email"];
-//     $password = $_POST["password"];
-
-//     // SQL to retrieve hashed password from the database
-//     $sql = "SELECT password FROM users WHERE email = '$email'";
-//     $result = $conn->query($sql);
-
-//     if ($result->num_rows > 0) {
-//         $row = $result->fetch_assoc();
-//         $hashed_password = $row["password"];
-
-//         // Verify the entered password
-//         if (password_verify($password, $hashed_password)) {
-//             echo "Login successful!";
-//         } else {
-//             echo "Invalid password!";
-//         }
-//     } else {
-//         echo "User not found!";
-//     }
-// }
-// $conn->close();
-?>
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -117,12 +9,6 @@ if(isset($_POST["login"])) {
   <link rel="stylesheet" type="text/css" href="index_style.css">
 </head>
 <body>
-  <!-- <form action="login_processing.php" method="post">
-    Username: <input type="email" name="email"><br>
-    Password: <input type="password" name="password"><br>
-    <input type="submit" value="Login">
-  </form> -->
-
   <!-- Section: Design Block -->
   <section class="text-center text-lg-start">
     <style>
@@ -150,7 +36,7 @@ if(isset($_POST["login"])) {
         <div class="col-lg-8">
           <div class="card-body py-5 px-md-5">
 
-            <form action="login.php" method="post" onsubmit="return validateForm()">
+            <form action="login_db.php" method="POST" onsubmit="return validateForm()">
               <!-- Email input -->
               <div class="form-outline mb-4">
                 <input type="email" name="user_email" id="user_email" class="form-control" />

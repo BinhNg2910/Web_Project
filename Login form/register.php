@@ -38,7 +38,7 @@ $conn->close();
   <link rel="stylesheet" type="text/css" href="index_style.css">
 </head>
 <body>
-  
+
   <!-- Section: Design Block -->
   <section class="text-center text-lg-start">
     <style>
@@ -66,7 +66,7 @@ $conn->close();
         <div class="col-lg-8">
           <div class="card-body py-5 px-md-5">
 
-            <form action="db_setup.php" method="POST" onsubmit="return validateForm()">
+            <form action="register_dbsetup.php" method="POST" onsubmit="return validateForm()">
                 <!-- Email input -->
                 <div class="form-outline mb-4">
                     <input type="email" name="user_email" id="user_email" class="form-control" />

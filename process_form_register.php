@@ -1,7 +1,7 @@
 <?php
 
-require_once('../.././Utils/utility.php');
-require_once('../.././processDB/dbhelper.php');
+require_once('utility.php');
+require_once('dbhelper.php');
 $fullname = $email = $msg = '';
 
 if(!empty($_POST)) {
