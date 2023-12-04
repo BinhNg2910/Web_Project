@@ -1,41 +1,30 @@
 <?php
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "UserAccount";
 
-if (isset($_POST["submit"])) {
-  // Get form data
-  $email = $_POST['user_email'];
-  $password = $_POST['user_password'];
-  $name = $_POST['user_name'];
-  $hash_password = password_hash($password, PASSWORD_DEFAULT); // Hash the password
-
-  $errors = array();
-
-  require_once "db_setup.php";
-
-  // $user_sql = "SELECT * FROM users WHERE email = '$email'";
-  // $result = mysqli_query($conn, $user_sql);
-  // $rowCount = mysqli_num_rows($result);
-  // if($rowCount > 0) {
-  //   array_push($errors, "Email already exists");
-  // }
-  // if($email === "binhnvhcm@gmail.com") {
-  //   array_push($errors, "Email already exists");
-  // }
-
-  
-  // $user_sql="INSERT INTO users (username, user_email, user_password) VALUES ('$name', '$email', '$paasword')";
-  $user_sql="INSERT INTO users (username, email, password) VALUES (?, ?, ?)";
-  $stmt = mysqli_stmt_init($conn);
-  $prepareStmt = mysqli_stmt_prepare($stmt, $user_sql);
-  if($prepareStmt) {
-    mysqli_stmt_bind_param($stmt, "sss", $name, $email, $hash_password);
-    mysqli_stmt_execute($stmt);
-    echo "<div class = 'alert alert-success'>You are registered successfully.</div>";
-    header("location: index.php?page=login");
-  } else {
-    die("Somthing went wrong !!!");
-  }
+// Create connection
+$conn = new mysqli($servername, $username, $password);
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
 }
-// $mysqli->close();
+
+//Create database
+$sql = "CREATE DATABASE IF NOT EXISTS $dbname";
+$conn->query($sql);
+$conn->close();
+
+$conn=new mysqli($servername,$username,$password,$dbname);
+
+// Create UserAccount Table
+$sql = "CREATE TABLE IF NOT EXISTS Users(
+    Email VARCHAR(255),
+    Password VARCHAR(255),
+    UserName VARCHAR(255)
+)";
+$conn->query($sql);
+$conn->close();
 ?>
 
 <!doctype html>
@@ -76,7 +65,7 @@ if (isset($_POST["submit"])) {
         <div class="col-lg-8">
           <div class="card-body py-5 px-md-5">
 
-            <form action="register.php" method="post" onsubmit="return validateForm()">
+            <form action="db_setup.php" method="POST" onsubmit="return validateForm()">
                 <!-- Email input -->
                 <div class="form-outline mb-4">
                     <input type="email" name="user_email" id="user_email" class="form-control" />
