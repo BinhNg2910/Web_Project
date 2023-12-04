@@ -8,10 +8,6 @@ body{
     color: #000;
     overflow-x: hidden;
     height: 100%;
-    /* background-image: url(background\(8\).jpg);
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position: center; */
     }
 .card{
     padding: 30px 40px;

@@ -21,7 +21,7 @@ if($res!==false){
         $responseData = ["message" => $row];
         $jsonResponse = json_encode($responseData);
     } else {
-        $responseData = ["message" => "hehe r"];
+        $responseData = ["message" => "nothing"];
         $jsonResponse = json_encode($responseData);
     }
 }

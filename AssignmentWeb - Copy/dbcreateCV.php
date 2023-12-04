@@ -11,9 +11,7 @@ if($conn->connect_error){
 
 //insert into UserResume Table (usermail, resumename)
 $cvname = $_POST['cvname'];
-// $mail = $_POST['mail'];
 $sessionmail=$_SESSION['user_mail'];
-// $sessionmail = $_SESSION['user_mail'];
 $sql="INSERT INTO userresume (UserMail, ResumeName)
 VALUE ('$sessionmail', '$cvname')
 ";
@@ -63,7 +61,6 @@ $conn->query($sql);
 //insert into phone table
 foreach($_POST as $key => $value){
     if(strpos($key, 'phoneNumber-')===0){
-        // array_push($phoneNumbers, $value);
         $sql="INSERT INTO phone (Mail, Phone, ResumeName) VALUE ('$sessionmail','$value','$cvname')";
         $conn->query($sql);
     }
