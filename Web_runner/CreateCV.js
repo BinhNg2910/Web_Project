@@ -161,9 +161,13 @@ $(document).ready(function(){
         sessionStorage.clear();
         window.location.href='CreateCV.php';
     });
-    $('#back').on('clcik', function(){
+    $('#back').on('click', function(){
         sessionStorage.clear();
         window.location.href='index.php';
+    });
+    $('#fileupload').on('change', function(){
+        $('#submit_form_err').html('');
+        checkfile();
     });
 });
 
@@ -284,7 +288,7 @@ function checkaddress(){
 
 function checkfile(){
     let check = document.getElementById('fileupload');
-    if(check.length == 0){
+    if(check.files.length == 0){
         $('#upload_file_error').html('Please Upload a Photo!');
         return false;
     }

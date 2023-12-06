@@ -1,6 +1,5 @@
 <?php 
 session_start();
-echo $_SESSION['email'];
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -20,6 +19,9 @@ VALUE ('$sessionmail', '$cvname')
 $conn->query($sql);
 
 //insert into General Table
+if (!file_exists('uploads/')) {
+    mkdir('uploads/', 0777, true);
+}
 $file = $_FILES['file'];
 $fileName = $_FILES['file']['name'];
 $fileTmpName = $_FILES['file']['tmp_name'];
@@ -77,6 +79,6 @@ foreach($_POST as $key => $value){
     }
 }
 $conn->close();
-// header('location: CreateCV.php');
+header('location: CreateCV.php');
 // exit;
 ?>
