@@ -79,6 +79,6 @@ foreach($_POST as $key => $value){
     }
 }
 $conn->close();
-header('location: CreateCV.php');
+header('location: index.php');
 // exit;
 ?>
