@@ -1,7 +1,9 @@
 <?php 
+session_start();
+echo $_SESSION['email'];
 $servername = "localhost";
-$username = "username";
-$password = "password";
+$username = "root";
+$password = "";
 $dbname = "myDB";
 //Create connection
 $conn = new mysqli($servername,$username,$password,$dbname);
@@ -11,7 +13,7 @@ if($conn->connect_error){
 
 //insert into UserResume Table (usermail, resumename)
 $cvname = $_POST['cvname'];
-$sessionmail=$_SESSION['user_mail'];
+$sessionmail=$_SESSION['email'];
 $sql="INSERT INTO userresume (UserMail, ResumeName)
 VALUE ('$sessionmail', '$cvname')
 ";
@@ -75,6 +77,6 @@ foreach($_POST as $key => $value){
     }
 }
 $conn->close();
-header('location: CreateCV.php');
-exit;
+// header('location: CreateCV.php');
+// exit;
 ?>

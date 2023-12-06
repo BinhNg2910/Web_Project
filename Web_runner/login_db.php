@@ -34,6 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           $_SESSION['email'] = $row['Email'];
           $_SESSION['password'] = $row['Password'];
           setcookie('auto_login', $row['Email'], time() + 300);
+          // echo '<script>window.alert("ok");</script>';
           header("Location: index.php");
         } else {
           echo '<script>window.alert("Incorrect username or password! lew lew");</script>';

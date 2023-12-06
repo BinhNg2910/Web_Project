@@ -138,7 +138,7 @@ $(document).ready(function(){
     });
 
     $('#submit_form').on('click', function(){
-        if(!checkcvname() || !checkfname() || !checkbirthday() || !checkaddress() || !existedphone() || !existedCerDeg() || !checkmail() || !checkwebsite()){
+        if(!checkfile() || !checkcvname() || !checkfname() || !checkbirthday() || !checkaddress() || !existedphone() || !existedCerDeg() || !checkmail() || !checkwebsite()){
             $('#submit_form_err').html('Please fill/correct all required input!');
             return false;
         }
@@ -160,6 +160,10 @@ $(document).ready(function(){
     $('#reset').on('click', function(){
         sessionStorage.clear();
         window.location.href='CreateCV.php';
+    });
+    $('#back').on('clcik', function(){
+        sessionStorage.clear();
+        window.location.href='index.php';
     });
 });
 
@@ -214,8 +218,11 @@ function checkcvname(){
                     const parsedResponse = JSON.parse(response);
                     const message = parsedResponse.message;
                     if(message==true){
+                        console.log('existed');
                         check=true;
                         $('#cvname_err').html("Existed CV's name!");
+                    } else {
+                        console.log('error r');
                     }
                 }
             });
@@ -272,6 +279,16 @@ function checkaddress(){
         return false;
     }
     $('#address_err').html('');
+    return true;
+}
+
+function checkfile(){
+    let check = document.getElementById('fileupload');
+    if(check.length == 0){
+        $('#upload_file_error').html('Please Upload a Photo!');
+        return false;
+    }
+    $('#upload_file_error').html('');
     return true;
 }
 

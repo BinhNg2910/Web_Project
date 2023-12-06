@@ -1,7 +1,9 @@
 <?php 
+// session_start();
+// echo $_SESSION['email'];
 $servername = "localhost";
-$username = "username";
-$password = "password";
+$username = "root";
+$password = "";
 $dbname = "myDB";
 //Create connection
 $conn = new mysqli($servername,$username,$password);
@@ -203,8 +205,9 @@ $conn->close();
                     </div>
                     <div class="row justify-content-center text-center">
                         <div class="form-group col-sm-6">
-                            <label class="form-control-label">Upload Photo</label>
-                            <input type="file" accept="image/jpeg,.jpeg,image/png,.png" placeholder="Upload Photo" name="file"/>
+                            <label class="form-control-label">Upload Photo<span class="text-danger"> *</span></label>
+                            <input type="file" accept="image/jpeg,.jpeg,image/png,.png" id="fileupload" placeholder="Upload Photo" name="file"/>
+                            <span class='text-danger' style='text-align:center' id='upload_file_error'></span>
                         </div>
                     </div>
                     <div class="row justify-content-end text-center">
@@ -217,6 +220,11 @@ $conn->close();
         </div>
     </div>
 </div>
-<script src="./CreateCV.js"></script>
+<div>
+    <button class="btn btn-primary " id="back">
+        <i class="fa fa-arrow-left" aria-hidden="true"></i> <a class="text-white text-decoration-none" href="index.php" style="">BACK</a>
+    </button>
+</div>
+<script src="CreateCV.js"></script>
 </body>
 </html>
