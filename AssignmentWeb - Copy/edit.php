@@ -160,7 +160,7 @@ input[type="submit"]:hover {
     <?php $row = $result->fetch_assoc(); ?>
     <form action="update.php" method="POST" onsubmit="return validatePhoneNumber() && validateBirthday();">
         <input type="hidden" name="cvName" value="<?php echo htmlspecialchars($row['ResumeName']); ?>">
-
+        <input type="hidden" name="mail" value="<?php echo htmlspecialchars($row['Mail']); ?>">
         <h3>Edit Résumé Information</h3>
         <label for="fullName">Full Name:</label>
         <input type="text" id="fullName" name="fullName" value="<?php echo htmlspecialchars($row['FullName']); ?>">
@@ -172,7 +172,7 @@ input[type="submit"]:hover {
         <input type="text" id="addr" name="addr" value="<?php echo htmlspecialchars($row['Addr']); ?>">
         </br>
         <label for="mail">Mail:</label>
-        <input type="text" id="mail" name="mail" value="<?php echo htmlspecialchars($row['Mail']); ?>">
+        <input type="text" id="mail" name="mail" value="<?php echo htmlspecialchars($row['Mail']); ?>" readonly>
         </br>
         <label for="website">Website:</label>
         <input type="text" id="website" name="website" value="<?php echo htmlspecialchars($row['Website']); ?>">
@@ -217,6 +217,7 @@ input[type="submit"]:hover {
         <h3>Delete All Data</h3>
         <form action="delete.php" method="POST">
             <input type="hidden" name="cvName" value="<?php echo htmlspecialchars($selectedCvName); ?>">
+            <input type="hidden" name="mail" value="<?php echo htmlspecialchars($row['Mail']); ?>">
             <input type="submit" name="deleteAll" value="Delete All Data">
         </form>
     </div>

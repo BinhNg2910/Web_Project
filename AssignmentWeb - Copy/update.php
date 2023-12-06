@@ -27,26 +27,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         FullName='$fullName',
         Birthday='$birthday',
         Addr='$addr',
-        Mail='$mail',
         Website='$website',
         Skills='$skills',
         PersonalSkills='$personalSkills',
         Experience='$experience'
-        WHERE ResumeName='$cvName'";
+        WHERE ResumeName='$cvName' AND Mail='$mail'";
     $conn->query($sqlUpdateGeneral);
 
-    $sqlUpdateUser = "UPDATE UserResume SET
-        UserMail='$mail'
-        WHERE ResumeName='$cvName'";
-    $conn->query($sqlUpdateUser);
 
     // Update phone numbers
     if (isset($_POST["phone"])) {
         foreach ($_POST["phone"] as $phoneId => $phone) {
             $sqlUpdatePhone = "UPDATE Phone SET 
-            Phone='$phone',
-            Mail='$mail' 
-            WHERE resumeName='$phoneId'";
+            Phone='$phone'
+            WHERE resumeName='$phoneId' AND Mail='$mail'";
             $conn->query($sqlUpdatePhone);
         }
     }
@@ -55,9 +49,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST["cerDeg"])) {
         foreach ($_POST["cerDeg"] as $cerDegId => $cerDeg) {
             $sqlUpdateCerDeg = "UPDATE CerDeg SET 
-            Mail='$mail',
             CerDeg='$cerDeg' 
-            WHERE resumeName='$cerDegId'";
+            WHERE resumeName='$cerDegId' AND Mail='$mail'";
             $conn->query($sqlUpdateCerDeg);
         }
     }
