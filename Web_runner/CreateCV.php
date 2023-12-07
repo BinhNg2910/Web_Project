@@ -30,13 +30,14 @@ $sql = "CREATE TABLE IF NOT EXISTS General(
     Birthday DATETIME,
     Addr VARCHAR(500),
     Mail VARCHAR(255),
-    SessionMail VARCHAR(255),
+    SessionMail VARCHAR(255) NOT NULL,
     Website VARCHAR(255),
     Skills VARCHAR(500),
     PersonalSkills VARCHAR(500),
     Experience VARCHAR(500),
     Photo VARCHAR(255),
-    ResumeName VARCHAR(255)
+    ResumeName VARCHAR(255) NOT NULL,
+    CONSTRAINT MailResumeName PRIMARY KEY (SessionMail,ResumeName)
 )";
 $conn->query($sql);
 
