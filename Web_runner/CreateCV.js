@@ -169,6 +169,12 @@ $(document).ready(function(){
         $('#submit_form_err').html('');
         checkfile();
     });
+    $('#closephone').on('click', function(){
+        document.getElementById('phone').value='';
+    });
+    $('#closeCerDeg').on('click', function(){
+        document.getElementById('CerDeg').value='';
+    });
 });
 
 function addPhoneinput(phoneNumber){

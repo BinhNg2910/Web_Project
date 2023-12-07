@@ -1,6 +1,4 @@
 <?php 
-// session_start();
-// echo $_SESSION['email'];
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -129,7 +127,7 @@ $conn->close();
                                         <span class="text-danger" id="phone_err"></span>
                                     </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-primary" style="background-color: #a79b9b" data-bs-dismiss="modal">Close</button>
+                                            <button type="button" id="closephone" class="btn btn-primary" style="background-color: #a79b9b" data-bs-dismiss="modal">Close</button>
                                             <button type="button" name="submitphone" class="btn btn-secondary" style="background-color: #e45353" id="phone_submit">Submit</button>
                                         </div>
                                     </div>
@@ -159,7 +157,7 @@ $conn->close();
                                         <span class="text-danger" id="CerDeg_err"></span>
                                     </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-primary" style="background-color: #a79b9b" data-bs-dismiss="modal">Close</button>
+                                            <button type="button" id="closeCerDeg" class="btn btn-primary" style="background-color: #a79b9b" data-bs-dismiss="modal">Close</button>
                                             <button type="button" name="submitCerDeg" class="btn btn-secondary" style="background-color: #e45353" id="CerDeg_submit">Submit</button>
                                         </div>
                                     </div>
