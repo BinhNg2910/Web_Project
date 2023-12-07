@@ -28,76 +28,71 @@
       die("Connection failed: " . $conn->connect_error);
     }
   ?>
-
+  <div id="navbar_style">
   <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class  ="container-fluid">
       <div><a class="navbar-brand" href="index.php?page=home">RESUME TEMPLATE</a></div>
       <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button> -->
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
-      <?php if (isset($_SESSION['email'])) : ?>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+        <ul class="navbar-nav">
+          <?php if (isset($_SESSION['email'])) : ?>
+            <?php
+              // Fetch the username from the database based on the user's email
+              $email = $_SESSION['email'];
+              $query = "SELECT username FROM users WHERE email = '$email'";
+              $result = $conn->query($query);
 
-        <?php
-          // Fetch the username from the database based on the user's email
-          $email = $_SESSION['email'];
-          $query = "SELECT username FROM users WHERE email = '$email'";
-          $result = $conn->query($query);
+              if ($result->num_rows > 0) {
+                  $row = $result->fetch_assoc();
+                  $username = $row['username'];
+              } else {
+                  // Handle the case where the user is not found in the database
+                  $username = "User";
+              }
+            ?>
+            <li class="nav-item">
+              <a id="CreateCVlink" class="nav-link active" href="CreateCV.php">Crete new CV</a>
+            </li>
+            <li class="nav-item">
+              <a id="productlink" class="nav-link active" href="edit.php">Edit CV</a>
+            </li>
+            <!-- <li class="nav-item">
+              <a id="logoutlink" class="nav-link" href="logout.php">Logout</a>
+            </li> -->
 
-          if ($result->num_rows > 0) {
-              $row = $result->fetch_assoc();
-              $username = $row['username'];
-          } else {
-              // Handle the case where the user is not found in the database
-              $username = "User";
-          }
-        ?>
-
-        <li class="nav-item">
-          <a id="CreateCVlink" class="nav-link active" href="CreateCV.php">Crete new CV</a>
-        </li>
-        <li class="nav-item">
-          <a id="productlink" class="nav-link active" href="index.php?page=edit">Edit CV</a>
-        </li>
-        <!-- <li class="nav-item">
-          <a id="logoutlink" class="nav-link" href="logout.php">Logout</a>
-        </li> -->
-
-        <div class="nav-item btn-group">
-          <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-            Hello, <?php echo $username; ?>
-          </button>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">My Resume</a></li>
-            <li><a class="dropdown-item" href="#">Profile</a></li>
-            <li><a class="dropdown-item" href="#">Setting</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a id="logoutlink" class="dropdown-item" href="logout.php">Logout</a></li>
-          </ul>
-        </div>
-        <!-- <li class="nav-item">
-          <a id="logoutlink" class="nav-link" href="#">Hello, <?php echo $username; ?></a>
-        </li> -->
-      <?php else : ?>
-        <!-- <?php echo $_SESSION['email']; ?> -->
-        <li class="nav-item">
-          <a id="loginlink" class="nav-link active" href="index.php?page=login">Login</a>
-        </li>
-        <li class="nav-item">
-          <a id="registerlink" class="nav-link active" href="index.php?page=register">Register</a>
-        </li>
-      <?php endif; ?>
-        
-      </ul>
+            <div class="nav-item btn-group">
+              <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                Hello, <?php echo $username; ?>
+              </button>
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li><a class="dropdown-item" href="#">My Resume</a></li>
+                <li><a class="dropdown-item" href="#">Profile</a></li>
+                <li><a class="dropdown-item" href="#">Setting</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a id="logoutlink" class="dropdown-item" href="logout.php">Logout</a></li>
+              </ul>
+            </div>
+          <?php else : ?>
+            <!-- <?php echo $_SESSION['email']; ?> -->
+            <li class="nav-item">
+              <a id="loginlink" class="nav-link active" href="index.php?page=login">Login</a>
+            </li>
+            <li class="nav-item">
+              <a id="registerlink" class="nav-link active" href="index.php?page=register">Register</a>
+            </li>
+          <?php endif; ?>       
+        </ul>
 
     </div>
   </nav>
+  </div>
 
 
 
-  <div id="searchResults"></div>
+  <!-- <div id="searchResults"></div> -->
   <div class="container mt-4">
     <?php
       $page = $_GET['page'] ?? 'home';

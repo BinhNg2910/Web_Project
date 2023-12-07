@@ -63,9 +63,13 @@ $conn->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Résumé</title>
     <!-- Add your stylesheets or inline styles here -->
-    <style>
-        /* Add your CSS styling here */
-        body {
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<style>
+/* Add your CSS styling here */
+body {
     font-family: 'Arial', sans-serif;
     background-color: #f5f5f5;
     margin: 0;
@@ -135,10 +139,18 @@ input[type="submit"]:hover {
     background-color: #45a049;
 }
 
-        /* Add more styling as needed */
-    </style>
+/* Add more styling as needed */
+</style>
 </head>
+
 <body>
+<body>
+<div style = "padding: 10px">
+    <button class="btn btn-primary " id="back">
+        <i class="fa fa-arrow-left" aria-hidden="true"></i> <a class="text-white text-decoration-none" href="index.php" style="">BACK</a>
+    </button>
+</div>
+<div id="edit">
     <div class="container">
         <h3>Edit Résumé Information</h3>
 
@@ -221,5 +233,6 @@ input[type="submit"]:hover {
             <input type="submit" name="deleteAll" value="Delete All Data">
         </form>
     </div>
+</div>
 </body>
 </html>
