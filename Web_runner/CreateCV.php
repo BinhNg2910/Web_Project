@@ -1,6 +1,4 @@
 <?php 
-// session_start();
-// echo $_SESSION['email'];
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -30,13 +28,14 @@ $sql = "CREATE TABLE IF NOT EXISTS General(
     Birthday DATETIME,
     Addr VARCHAR(500),
     Mail VARCHAR(255),
-    SessionMail VARCHAR(255),
+    SessionMail VARCHAR(255) NOT NULL,
     Website VARCHAR(255),
     Skills VARCHAR(500),
     PersonalSkills VARCHAR(500),
     Experience VARCHAR(500),
     Photo VARCHAR(255),
-    ResumeName VARCHAR(255)
+    ResumeName VARCHAR(255) NOT NULL,
+    CONSTRAINT MailResumeName PRIMARY KEY (SessionMail,ResumeName)
 )";
 $conn->query($sql);
 
@@ -134,7 +133,7 @@ $conn->close();
                                         <span class="text-danger" id="phone_err"></span>
                                     </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-primary" style="background-color: #a79b9b" data-bs-dismiss="modal">Close</button>
+                                            <button type="button" id="closephone" class="btn btn-primary" style="background-color: #a79b9b" data-bs-dismiss="modal">Close</button>
                                             <button type="button" name="submitphone" class="btn btn-secondary" style="background-color: #e45353" id="phone_submit">Submit</button>
                                         </div>
                                     </div>
@@ -164,7 +163,7 @@ $conn->close();
                                         <span class="text-danger" id="CerDeg_err"></span>
                                     </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-primary" style="background-color: #a79b9b" data-bs-dismiss="modal">Close</button>
+                                            <button type="button" id="closeCerDeg" class="btn btn-primary" style="background-color: #a79b9b" data-bs-dismiss="modal">Close</button>
                                             <button type="button" name="submitCerDeg" class="btn btn-secondary" style="background-color: #e45353" id="CerDeg_submit">Submit</button>
                                         </div>
                                     </div>
@@ -209,9 +208,9 @@ $conn->close();
                             <input type="text" id="experience" name="experience" placeholder="Type your job experience, e.g 2 years working at Renesas..."> 
                         </div>
                     </div>
+                    <label class="form-control-label">Upload Photo<span class="text-danger"> *</span></label>
                     <div class="row justify-content-center text-center">
-                        <div class="form-group col-sm-6">
-                            <label class="form-control-label">Upload Photo<span class="text-danger"> *</span></label>
+                        <div class="form-group col-sm-6" style="display:flex; justify-content:center; align-items:center;">
                             <input type="file" accept="image/jpeg,.jpeg,image/png,.png" id="fileupload" placeholder="Upload Photo" name="file"/>
                             <span class='text-danger' style='text-align:center' id='upload_file_error'></span>
                         </div>
