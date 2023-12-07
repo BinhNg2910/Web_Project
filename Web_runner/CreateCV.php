@@ -202,9 +202,9 @@ $conn->close();
                             <input type="text" id="experience" name="experience" placeholder="Type your job experience, e.g 2 years working at Renesas..."> 
                         </div>
                     </div>
+                    <label class="form-control-label">Upload Photo<span class="text-danger"> *</span></label>
                     <div class="row justify-content-center text-center">
-                        <div class="form-group col-sm-6">
-                            <label class="form-control-label">Upload Photo<span class="text-danger"> *</span></label>
+                        <div class="form-group col-sm-6" style="display:flex; justify-content:center; align-items:center;">
                             <input type="file" accept="image/jpeg,.jpeg,image/png,.png" id="fileupload" placeholder="Upload Photo" name="file"/>
                             <span class='text-danger' style='text-align:center' id='upload_file_error'></span>
                         </div>
