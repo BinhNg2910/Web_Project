@@ -63,7 +63,7 @@
                 </div>
 
                 <!-- Submit button -->
-                <button type="submit" name="submit" class="btn btn-primary btn-block mb-4">Log in</button>
+                <button type="submit" name="submit" class="btn btn-primary btn-block mb-4">Sign in</button>
                 <!-- <input type="submit" value="Sign in" name="submmit"> -->
 
             </form>

@@ -67,7 +67,7 @@
 
               <!-- Submit button -->
 
-              <button type="submit" class="btn btn-primary btn-block mb-4">Sign in</button>
+              <button type="submit" class="btn btn-primary btn-block mb-4">Log in</button>
               <!-- <input type="submit" value="Log in"> -->
             </form>
 
@@ -82,16 +82,16 @@
 
 </body>
 <script>
-    function validateForm() {
-      var email = document.getElementById('user_email').value;
-      var password = document.getElementById('user_password').value;
+  function validateForm() {
+    var email = document.getElementById('user_email').value;
+    var password = document.getElementById('user_password').value;
 
-      // Perform basic validation
-      if (email.trim() === '' || password.trim() === '') {
-        alert('Please enter both email and password.');
-        return false;
-      }
-      return true; // Allow form submission
+    // Perform basic validation
+    if (email.trim() === '' || password.trim() === '') {
+      alert('Please enter both email and password.');
+      return false;
     }
-  </script>
+    return true; // Allow form submission
+  }
+</script>
 </html>

@@ -76,7 +76,7 @@
               </ul>
             </div>
           <?php else : ?>
-            <!-- <?php echo $_SESSION['email']; ?> -->
+
             <li class="nav-item">
               <a id="loginlink" class="nav-link active" href="index.php?page=login">Login</a>
             </li>
