@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -8,7 +8,7 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
   <!-- <link rel="stylesheet" type="text/css" href="index_style.css"> -->
 </head>
-<body>
+<body style="background-image: url(../../assets/photos/ecommerce.jpeg); background-size: cover; background-repeat: no-repeat;">
 
   <!-- Section: Design Block -->
   <section class="text-center text-lg-start">
@@ -28,46 +28,41 @@
         }
       }
     </style>
-    <div class="card mb-3">
-      <div class="row g-0 d-flex align-items-center">
-        <div class="col-lg-4 d-none d-lg-flex">
-            <img src="https://mdbootstrap.com/img/new/ecommerce/vertical/004.jpg" alt="Trendy Pants and Shoes"
-            class="w-100 rounded-t-5 rounded-tr-lg-0 rounded-bl-lg-5" />
-        </div>
-        <div class="col-lg-8">
-          <div class="card-body py-5 px-md-5">
-
-            <form action="register_dbsetup.php" method="POST" onsubmit="return validateForm()">
+    <div class="container">
+      <h2 class="text-center mb-4">Registration Form</h2> <!-- Title added here -->
+      <div class="card mb-3">
+        <div class="row g-0 d-flex align-items-center">
+          <div class="col-lg-8 mx-auto"> <!-- Center the form -->
+            <div class="card-body py-5 px-md-5">
+              <form action="register_dbsetup.php" method="POST" onsubmit="return validateForm()">
                 <!-- Email input -->
                 <div class="form-outline mb-4">
-                    <input type="email" name="user_email" id="user_email" class="form-control" />
-                    <label class="form-label" for="user_email">Email address</label>
+                  <input type="email" name="user_email" id="user_email" class="form-control" />
+                  <label class="form-label" for="user_email">Email address</label>
                 </div>
 
-                <!-- Email input -->
+                <!-- User input -->
                 <div class="form-outline mb-4">
-                    <input type="name" name="user_name" id="user_name" class="form-control" />
-                    <label class="form-label" for="user_name">User name</label>
+                  <input type="name" name="user_name" id="user_name" class="form-control" />
+                  <label class="form-label" for="user_name">User name</label>
                 </div>
 
                 <!-- Password input -->
                 <div class="form-outline mb-4">
-                    <input type="password" name="user_password" id="user_password" class="form-control" />
-                    <label class="form-label" for="user_password">Password</label>
+                  <input type="password" name="user_password" id="user_password" class="form-control" />
+                  <label class="form-label" for="user_password">Password</label>
                 </div>
 
                 <!-- Password confirmation input -->
                 <div class="form-outline mb-4">
-                    <input type="password" name="user_confirm_password" id="user_confirm_password" class="form-control" />
-                    <label class="form-label" for="user_confirm_password">Password confirmation</label>
+                  <input type="password" name="user_confirm_password" id="user_confirm_password" class="form-control" />
+                  <label class="form-label" for="user_confirm_password">Password confirmation</label>
                 </div>
 
                 <!-- Submit button -->
                 <button type="submit" name="submit" class="btn btn-primary btn-block mb-4">Sign in</button>
-                <!-- <input type="submit" value="Sign in" name="submmit"> -->
-
-            </form>
-
+              </form>
+            </div>
           </div>
         </div>
       </div>

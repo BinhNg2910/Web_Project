@@ -1,4 +1,9 @@
+
+
+
 <?php
+session_start();
+
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -10,22 +15,24 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Fetch all distinct cvNames
-$sqlCvNames = "SELECT DISTINCT ResumeName FROM General";
+// Fetch all distinct cvNames for the session email
+
+$sessionEmail = $_SESSION['email'];
+$sqlCvNames = "SELECT DISTINCT ResumeName FROM General WHERE SessionMail = '$sessionEmail'";
 $resultCvNames = $conn->query($sqlCvNames);
 
 // Assuming you pass the selected cvName as a parameter in the URL
 $selectedCvName = isset($_GET['cvName']) ? $_GET['cvName'] : '';
 
-// Fetch data based on the selected cvName
+// Fetch data based on the selected cvName and session email
 $sql = "SELECT * FROM General WHERE ResumeName = '$selectedCvName'";
 $result = $conn->query($sql);
 
-// Fetch phone numbers based on the selected cvName
+// Fetch phone numbers based on the selected cvName and session email
 $sqlPhone = "SELECT * FROM Phone WHERE ResumeName = '$selectedCvName'";
 $resultPhone = $conn->query($sqlPhone);
 
-// Fetch degrees based on the selected cvName
+// Fetch degrees based on the selected cvName and session email
 $sqlCerDeg = "SELECT * FROM CerDeg WHERE ResumeName = '$selectedCvName'";
 $resultCerDeg = $conn->query($sqlCerDeg);
 
@@ -178,7 +185,11 @@ input[type="submit"]:hover {
         <input type="text" id="fullName" name="fullName" value="<?php echo htmlspecialchars($row['FullName']); ?>">
         </br>
         <label for="birthday">Birthday:</label>
-        <input type="date" id="birthday" name="birthday" value="<?php echo htmlspecialchars($row['Birthday']); ?>">
+        <?php
+            // Format the date for displaying in the HTML form
+            $formattedBirthday = date('Y-m-d', strtotime($row['Birthday']));
+        ?>
+        <input type="date" id="birthday" name="birthday" value="<?php echo htmlspecialchars($formattedBirthday); ?>">
         </br>
         <label for="addr">Address:</label>
         <input type="text" id="addr" name="addr" value="<?php echo htmlspecialchars($row['Addr']); ?>">
